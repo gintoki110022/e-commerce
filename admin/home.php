@@ -1,0 +1,1 @@
+<img src="../upload/cover.jpg" class="thumbnail full-screen">
