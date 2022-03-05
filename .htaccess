@@ -1,0 +1,24 @@
+RewriteEngine On
+
+#Make sure that supported files are not also be redirected
+RewriteCond %{REQUEST_URI} !(public|css)
+RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|robots\.txt)$ [NC]	
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#Store sensitive data to environment variable
+RewriteRule .* - [E=API_KEY:AIzaSyCC0T7dxFJ7jhZNzEiitOOaE-unyh1CN88]
+
+#Redirect URL to be more user-friendly
+RewriteRule "^products-([a-z0-9]+).html$" "index.php?page=products&cat=$1"
+RewriteRule "^detail-([\w\d_-]+)-([0-9]+).html$" "detail_product.php?p=$2"
+RewriteRule "^search-([0-9]+).html$" "index.php?page=search_result&id=$1"
+RewriteRule "^brand-([a-zA-Z]+)-([0-9]+).html$" "index.php?page=brand_product&id=$2&name=$1"
+RewriteRule "^([a-z]+).html$" "index.php?page=$1"
+RewriteRule "^admin/([a-z]+).html$" "admin/index.php?page=$1"
+
+#Handle Errors
+ErrorDocument 404 http://localhost/assignment_web/errors/404.php
+
+
+
